@@ -1,0 +1,60 @@
+services:
+  mysql:
+    image: mariadb:10.5
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+
+  frontend:
+    build:
+      context: ./front
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    networks:
+      - app-network
+    depends_on:
+      - api
+    env_file:
+      - ./front/.env
+
+  form-service:
+    build:
+      context: ./form
+      dockerfile: Dockerfile
+    ports:
+      - "3001:80"
+    networks:
+      - app-network
+    depends_on:
+      - api
+    env_file:
+      - ./form/.env
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+    depends_on:
+      - mysql
+    env_file:
+      - ./api/.env
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db_data:
