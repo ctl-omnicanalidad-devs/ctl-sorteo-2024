@@ -7,6 +7,7 @@ const get_users = async (req, res, next) => {
     const results = await executeQuery(consulta);
     res.status(200).json({ participantes: results });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Error al obtener participantes", error });
   }
 };
@@ -14,12 +15,9 @@ const get_users = async (req, res, next) => {
 const add_user = async (req, res, next) => {
   const consulta =
     "INSERT INTO participantes (nombre, apellido, correo, empresa) VALUES (?, ?, ?, ?)";
-  const values = [
-    req.body.nombre,
-    req.body.apellido,
-    req.body.correo,
-    req.body.empresa,
-  ];
+
+  const empresa = req.body.correo.endsWith("@ctl.com.ar") ? "CTL" : "ACTIVIA";
+  const values = [req.body.nombre, req.body.apellido, req.body.correo, empresa];
 
   try {
     const results = await executeQuery(consulta, values);
@@ -27,6 +25,12 @@ const add_user = async (req, res, next) => {
       .status(200)
       .json({ message: `Participante ${req.body.correo} guardado` });
   } catch (error) {
+    console.error(error);
+    if (error.code === "ER_DUP_ENTRY") {
+      return res.status(400).json({
+        message: `El correo ${req.body.correo} ya se encuentra registrado`,
+      });
+    }
     res.status(500).json({ message: "Error al guardar participante", error });
   }
 };
@@ -41,6 +45,7 @@ const sorteado = async (req, res, next) => {
       message: `Participante ${req.body.correo} marcado como ganador`,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Error al marcar ganador", error });
   }
 };

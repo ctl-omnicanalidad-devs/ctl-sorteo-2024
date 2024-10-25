@@ -9,7 +9,12 @@ var indexRouter = require("./routers/index");
 var usersRouter = require("./routers/users");
 
 const corsOptions = {
-  origin: "https://yagopajarino.github.io",
+  origin: [
+    "https://yagopajarino.github.io",
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:8080",
+  ],
   optionsSuccessStatus: 200,
 };
 
