@@ -1,68 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* * {
+    border: 1px solid red;
+    margin: none;
+} */
+
+/* .ruleta_container {
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+    position: absolute;
+} */
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --my-start-angle: 0deg;
+  --my-end-angle: 280deg;
 }
 
-a {
+#root {
+  height: 100vh;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+.triangle {
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 50px 175px 50px 0;
+  border-color: transparent #666666 transparent transparent;
+  transform: rotate(0deg);
+  left: -50px;
+  position: relative;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.mainbox{
+    position: absolute;
+    /* height: 400vh; */
+    height: 100vh;
+    aspect-ratio: 1;
+    /* left: -335vb;
+    top: -150vh; */
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    transition: all 5s ease;
+  }
+
+.mainbox:after{
+    position: absolute;
+    content: '';
+    width: 32px;
+    height: 32px;
+    /* background: url('arrow-left.png') no-repeat; */
+    background-size: 32px;
+    right: -30px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-button {
-  border-radius: 8px;
+.box{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    font-weight: bold;
+    border-radius: 50%;
+    /* border: 10px solid #000000; */
+    overflow: hidden;
+    transition: all ease 5s;
+    /* border: 5px solid rgb(65, 65, 65); */
+    margin: -1px;
+    font-family: Poppins, Arial;
+}
+
+.rotate {
+    animation: rotation 50s infinite linear;
+  }
+
+  @keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+
+.spin {
+  animation: spin 15s cubic-bezier(0, 0, 0.1, 1);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(var(--my-start-angle));
+  }
+  to {
+    transform: rotate(var(--my-end-angle));
+  }
+}
+
+span {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+p {
+  width: fit-content;
+}
+
+  /* span b{
+    font-size: 24px;
+    position: relative;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
+  
+  } */
+
+
+/* ------------------------------------------- Inicio Spinner ------------------------------------------- */
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  /* margin: 100px auto; */
+}
+
+.spinner > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.1;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+/* ------------------------------------------- Fin Spinner ------------------------------------------- */
+
+/* ------------------------------------------- Inicio Tira ------------------------------------------- */
+
+#tira_jugadores {
+  /* transition: transform 15s cubic-bezier(0, 0, 0.1, 1); */
+  transition: transform 5s cubic-bezier(0, 0, 0.1, 1);
+}
+
+.moverse {
+  animation: moverse var(--tiempo) infinite linear;
+}
+
+@keyframes moverse {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: translate(0px, var(--size_of_tira));
+  }
+}
+
+
+/* ------------------------------------------- Fin Tira ------------------------------------------- */
+
+/* ------------------------------------------- Inicio Button ------------------------------------------- */
+
+/* CSS */
+.button-40 {
+  background-color: #111827;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  border-radius: .75rem;
+  box-sizing: border-box;
+  color: #FFFFFF;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  flex: 0 0 auto;
+  font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  padding: .75rem 1.2rem;
+  text-align: center;
+  text-decoration: none #6B7280 solid;
+  text-decoration-thickness: auto;
+  transition-duration: .2s;
+  transition-property: background-color,border-color,color,fill,stroke;
+  transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+.button-40:hover {
+  background-color: #374151;
+}
+
+.button-40:focus {
+  box-shadow: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+@media (min-width: 768px) {
+  .button-40 {
+    padding: .75rem 1.5rem;
   }
 }
+
+/* ------------------------------------------- Fin Button ------------------------------------------- */
