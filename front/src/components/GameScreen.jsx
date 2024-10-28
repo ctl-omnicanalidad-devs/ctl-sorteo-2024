@@ -18,7 +18,6 @@ export default function GameScreen({
         jugadores={jugadores}
         numero={numero}
         setNumero={setNumero}
-        empresa={empresa}
       />
     </div>
   );
