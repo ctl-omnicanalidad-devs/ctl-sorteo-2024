@@ -7,6 +7,7 @@ var logger = require("morgan");
 
 var indexRouter = require("./routers/index");
 var usersRouter = require("./routers/users");
+var premiosRouter = require("./routers/premios");
 
 const corsOptions = {
   origin: [
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/premios", premiosRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

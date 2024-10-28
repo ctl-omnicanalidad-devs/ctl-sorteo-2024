@@ -1,7 +1,23 @@
 const executeQuery = require("../helpers/executeQuery");
 
-const get_users = async (req, res, next) => {
-  const consulta = "SELECT * FROM participantes";
+const sayHello = (req, res, next) => {
+  res.status(200).json({ message: "Hello" });
+};
+
+const get_users_ctl = async (req, res, next) => {
+  const consulta = "SELECT * FROM participantes WHERE empresa = 'CTL'";
+
+  try {
+    const results = await executeQuery(consulta);
+    res.status(200).json({ participantes: results });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al obtener participantes", error });
+  }
+};
+
+const get_users_activia = async (req, res, next) => {
+  const consulta = "SELECT * FROM participantes WHERE empresa = 'ACTIVIA'";
 
   try {
     const results = await executeQuery(consulta);
@@ -51,7 +67,9 @@ const sorteado = async (req, res, next) => {
 };
 
 module.exports = {
-  get_users,
+  sayHello,
+  get_users_ctl,
+  get_users_activia,
   add_user,
   sorteado,
 };
