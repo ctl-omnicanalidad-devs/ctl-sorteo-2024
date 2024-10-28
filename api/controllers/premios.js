@@ -9,7 +9,7 @@ const get_premios_ctl = async (req, res, next) => {
 
   try {
     const results = await executeQuery(consulta);
-    res.status(200).json({ participantes: results });
+    res.status(200).json({ premios: results });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al obtener premios", error });
@@ -21,7 +21,7 @@ const get_premios_activia = async (req, res, next) => {
 
   try {
     const results = await executeQuery(consulta);
-    res.status(200).json({ participantes: results });
+    res.status(200).json({ premios: results });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al obtener premios", error });
