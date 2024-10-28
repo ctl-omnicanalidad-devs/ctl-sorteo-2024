@@ -17,8 +17,7 @@ export default function Main({
   setJugadores,
   jugadores,
   numero,
-  setNumero,
-  empresa,
+  setNumero
 }) {
   const [titulo, setTitulo] = useState("");
   const [imagen, setImagen] = useState("");
@@ -39,9 +38,7 @@ export default function Main({
 
     const posiblesGanadores = divs.filter(
       (i) =>
-        i.getAttribute("key_number") >= ultimoGanador + 50 &&
-        (i.getAttribute("empresa") == empresa ||
-          i.getAttribute("puede_ganar").includes(minum))
+        i.getAttribute("key_number") >= ultimoGanador + 50 && i.getAttribute("puede_ganar") == 1
     );
     const index_ganador = getRandomInt(
       0,
