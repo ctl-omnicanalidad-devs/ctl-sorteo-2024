@@ -11,22 +11,6 @@ const get_user_id = (jugador) => {
   return jugador.correo;
 };
 
-const get_puede_ganar = (jugador, numero) => {
-  if (jugador.empresa == "CTL") {
-    return 1;
-  } else {
-    if (
-      (numero == 0 && jugador.participa_en.includes("5")) ||
-      (numero == 1 && jugador.participa_en.includes("4")) ||
-      (numero == 2 && jugador.participa_en.includes("3")) ||
-      (numero == 3 && jugador.participa_en.includes("2")) ||
-      (numero == 4 && jugador.participa_en.includes("1"))
-    ) {
-      return 1;
-    } else return 0;
-  }
-};
-
 const TIEMPO = 30; // Segundos en dar una vuelta
 const cantidadTiles = 8000;
 
@@ -68,7 +52,7 @@ export default function Tira({ jugadores, numero }) {
         return (
           <div
             key_number={index}
-            puede_ganar={jugador.participa_en}
+            puede_ganar={jugador.habilitado}
             offset_px={-index * div_h - div_h / 2 + window_size / 2}
             user_id={get_user_id(jugador)}
             empresa={jugador.empresa}
