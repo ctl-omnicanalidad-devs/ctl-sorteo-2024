@@ -5,7 +5,7 @@ const sayHello = (req, res, next) => {
 };
 
 const get_users_ctl = async (req, res, next) => {
-  const consulta = "SELECT * FROM participantes WHERE empresa = 'CTL'";
+  const consulta = "SELECT * FROM participantes WHERE empresa = 'CTL';";
 
   try {
     const results = await executeQuery(consulta);
@@ -28,12 +28,34 @@ const get_users_activia = async (req, res, next) => {
   }
 };
 
+const checkHabilitado = async (correo) => {
+  const consulta = `SELECT * FROM blacklist WHERE correo = ?`;
+  const values = [correo];
+
+  try {
+    const results = await executeQuery(consulta, values);
+    if (results.length === 0) return true;
+    return false;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
 const add_user = async (req, res, next) => {
+  const isHabilitado = await checkHabilitado(req.body.correo);
+
   const consulta =
-    "INSERT INTO participantes (nombre, apellido, correo, empresa) VALUES (?, ?, ?, ?)";
+    "INSERT INTO participantes (nombre, apellido, correo, empresa, habilitado) VALUES (?, ?, ?, ?, ?)";
 
   const empresa = req.body.correo.endsWith("@ctl.com.ar") ? "CTL" : "ACTIVIA";
-  const values = [req.body.nombre, req.body.apellido, req.body.correo, empresa];
+  const values = [
+    req.body.nombre,
+    req.body.apellido,
+    req.body.correo,
+    empresa,
+    isHabilitado,
+  ];
 
   try {
     const results = await executeQuery(consulta, values);
