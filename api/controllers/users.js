@@ -42,7 +42,27 @@ const checkHabilitado = async (correo) => {
   }
 };
 
+const checkInvitado = async (correo) => {
+  const consulta = `SELECT * FROM invitados WHERE email = ?`;
+  const values = [correo];
+
+  try {
+    const results = await executeQuery(consulta, values);
+    if (results.length === 0) return false;
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
 const add_user = async (req, res, next) => {
+  const isInvitado = await checkInvitado(req.body.correo);
+  if (!isInvitado) {
+    return res.status(400).json({
+      message: `El correo ${req.body.correo} no se encuentra invitado`,
+    });
+  }
   const isHabilitado = await checkHabilitado(req.body.correo);
 
   const consulta =

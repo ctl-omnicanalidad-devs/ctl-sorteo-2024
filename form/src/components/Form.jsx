@@ -27,10 +27,7 @@ const Form = () => {
     if (!formData.nombre || !formData.apellido || !formData.correo) {
         throw new Error('Por favor, completa todos los campos');
     }
-    if (!isCorreoCorporativo(formData.correo)) {
-        throw new Error('Utilizá tu correo @ctl.com.ar o @activia.com.ar');
-    }
-};
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
