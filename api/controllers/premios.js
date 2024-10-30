@@ -5,7 +5,8 @@ const sayHello = (req, res, next) => {
 };
 
 const get_premios_ctl = async (req, res, next) => {
-  const consulta = "SELECT * FROM premios WHERE empresa = 'CTL'";
+  const consulta =
+    "SELECT * FROM premios WHERE empresa = 'CTL' AND sorteado = 0;";
 
   try {
     const results = await executeQuery(consulta);
@@ -17,7 +18,8 @@ const get_premios_ctl = async (req, res, next) => {
 };
 
 const get_premios_activia = async (req, res, next) => {
-  const consulta = "SELECT * FROM premios WHERE empresa = 'ACTIVIA'";
+  const consulta =
+    "SELECT * FROM premios WHERE empresa = 'ACTIVIA' AND sorteado = 0;";
 
   try {
     const results = await executeQuery(consulta);
@@ -33,7 +35,7 @@ const sorteado = async (req, res, next) => {
   const values = [1, req.body.id];
 
   try {
-    const results = await executeQuery(conexion, consulta, values);
+    const results = await executeQuery(consulta, values);
     res.status(200).json({
       message: `Premio ${req.body.id} marcado como entregado`,
     });

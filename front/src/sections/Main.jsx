@@ -2,6 +2,7 @@ import Title from "./Title";
 import Body from "./Body";
 import { useEffect, useState } from "react";
 import DisplayGanador from "../components/DisplayGanador";
+import api from "../api/api.js"
 
 function getRandomInt(from, to) {
   // Make sure from and to are integers
@@ -29,13 +30,6 @@ export default function Main({
   const getGanador = () => {
     const divs = new Array(...document.querySelectorAll(".tile_jugador"));
 
-    let minum;
-    if (numero == 0) minum = 5;
-    else if (numero == 1) minum = 4;
-    else if (numero == 2) minum = 3;
-    else if (numero == 3) minum = 2;
-    else if (numero == 4) minum = 1;
-
     const posiblesGanadores = divs.filter(
       (i) =>
         i.getAttribute("key_number") >= ultimoGanador + 50 && i.getAttribute("puede_ganar") == 1
@@ -52,7 +46,7 @@ export default function Main({
   useEffect(() => {
     if (numero >= 0 && numero < premios.length) {
       setTitulo(premios[numero].titulo);
-      setImagen(premios[numero].img_link);
+      setImagen(premios[numero].img);
     }
   }, [numero]);
 
@@ -79,31 +73,10 @@ export default function Main({
     }, 5000);
   };
 
-  const notificar_ganador = (user_id) => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("Authorization", "d13eg0t34m");
-
-    var raw = JSON.stringify({
-      id: user_id,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch("https://diego.ctl.com.ar/sorteado", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-  };
-
   useEffect(() => {
     if (ganador != false) {
-      // notificar_ganador(ganador.id)
+      api.set_player_ganador(ganador.id)
+      api.set_premio_sorteado(premios[numero].id)
       setJugadores(jugadores.filter((i) => i.correo != ganador.id));
     }
   }, [ganador]);

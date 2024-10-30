@@ -5,7 +5,8 @@ const sayHello = (req, res, next) => {
 };
 
 const get_users_ctl = async (req, res, next) => {
-  const consulta = "SELECT * FROM participantes WHERE empresa = 'CTL';";
+  const consulta =
+    "SELECT * FROM participantes WHERE empresa = 'CTL' AND ganador = 0;";
 
   try {
     const results = await executeQuery(consulta);
@@ -17,7 +18,8 @@ const get_users_ctl = async (req, res, next) => {
 };
 
 const get_users_activia = async (req, res, next) => {
-  const consulta = "SELECT * FROM participantes WHERE empresa = 'ACTIVIA'";
+  const consulta =
+    "SELECT * FROM participantes WHERE empresa = 'ACTIVIA' AND ganador = 0";
 
   try {
     const results = await executeQuery(consulta);
@@ -66,7 +68,7 @@ const add_user = async (req, res, next) => {
   const isHabilitado = await checkHabilitado(req.body.correo);
 
   const consulta =
-    "INSERT INTO participantes (nombre, apellido, correo, empresa, habilitado) VALUES (?, ?, ?, ?, ?)";
+    "INSERT INTO participantes (nombre, apellido, correo, empresa, ganador, habilitado) VALUES (?, ?, ?, ?, ?, ?)";
 
   const empresa = req.body.correo.endsWith("@ctl.com.ar") ? "CTL" : "ACTIVIA";
   const values = [
@@ -74,6 +76,7 @@ const add_user = async (req, res, next) => {
     req.body.apellido,
     req.body.correo,
     empresa,
+    0,
     isHabilitado,
   ];
 
@@ -94,11 +97,11 @@ const add_user = async (req, res, next) => {
 };
 
 const sorteado = async (req, res, next) => {
-  const consulta = "UPDATE participantes SET ganador = ? WHERE id = ?";
+  const consulta = "UPDATE participantes SET ganador = ? WHERE correo = ?";
   const values = [1, req.body.correo];
 
   try {
-    const results = await executeQuery(conexion, consulta, values);
+    const results = await executeQuery(consulta, values);
     res.status(200).json({
       message: `Participante ${req.body.correo} marcado como ganador`,
     });
