@@ -10,7 +10,7 @@ export default function GameScreen({
 }) {
   const [numero, setNumero] = useState(0);
   return (
-    <div className=" flex flex-row h-screen">
+    <div className=" flex flex-row h-screen bg-black21-100">
       <Ruleta jugadores={jugadores} numero={numero} />
       <Main
         premios={premios}

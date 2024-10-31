@@ -1,7 +1,7 @@
 export default function Title({ titulo }) {
   return (
-    <div className="flex shadow-lg bg-slate-100 my-10 p-5 text-center w-full rounded-sm">
-      <h1 className="w-full text-5xl">{titulo}</h1>
+    <div className="flex my-10 py-8 px-5 text-center w-full bg-fuchsia-700 text-white font-bold text-2xl">
+      <h1 className="w-full text-5xl">{titulo.toUpperCase()}</h1>
     </div>
   );
 }

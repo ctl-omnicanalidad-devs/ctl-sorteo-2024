@@ -82,7 +82,7 @@ export default function Main({
   }, [ganador]);
 
   return (
-    <div className=" w-2/3 mr-5 flex">
+    <div className=" w-2/3 mr-5 flex bg-black21-100">
       {ganador ? (
         <DisplayGanador
           ganador={ganador}
@@ -97,7 +97,7 @@ export default function Main({
         ""
       )}
 
-      <div className="w-full">
+      <div className="w-full bg-black21-100">
         <Title titulo={titulo} />
         <Body imagen={imagen} />
         <div className="flex w-full justify-evenly mt-12">

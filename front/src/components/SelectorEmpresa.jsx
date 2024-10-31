@@ -2,7 +2,7 @@ import CardEmpresa from "./CardEmpresa";
 
 export default function SelectorEmpresa({ setEmpresa }) {
   return (
-    <div className=" h-full flex items-center flex-col justify-around">
+    <div className=" h-full flex items-center flex-col justify-around bg-black21-100">
       <CardEmpresa
         setEmpresa={setEmpresa}
         nombre={"CTL"}

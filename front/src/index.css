@@ -31,7 +31,7 @@
   height: 0px;
   border-style: solid;
   border-width: 50px 175px 50px 0;
-  border-color: transparent #666666 transparent transparent;
+  border-color: transparent #e4e4e4 transparent transparent;
   transform: rotate(0deg);
   left: -50px;
   position: relative;
@@ -140,7 +140,7 @@ p {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #333;
+  background-color: #c3c3c3;
   opacity: 0.1;
   position: absolute;
   top: 0;
@@ -204,11 +204,11 @@ p {
 
 /* CSS */
 .button-40 {
-  background-color: #111827;
+  background-color: #e0e0e0;
   border: 1px solid transparent;
   border-radius: .75rem;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: #000000;
   cursor: pointer;
   flex: 0 0 auto;
   font-family: "Inter var",ui-sans-serif,system-ui,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
@@ -229,7 +229,7 @@ p {
 }
 
 .button-40:hover {
-  background-color: #374151;
+  background-color: #9b9b9b;
 }
 
 .button-40:focus {
