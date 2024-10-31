@@ -15,6 +15,10 @@ const corsOptions = {
     "http://localhost:3000",
     "http://localhost:3001",
     "http://localhost:8080",
+    "http://sorteo.ctl.com.ar",
+    "https://sorteo.ctl.com.ar",
+    "http://fiesta.ctl.com.ar",
+    "https://fiesta.ctl.com.ar",
   ],
   optionsSuccessStatus: 200,
 };
