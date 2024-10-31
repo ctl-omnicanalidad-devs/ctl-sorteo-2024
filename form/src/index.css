@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  background-color: #212121;
+}
+
+#title-fiesta {
+    font-family: "Zen Dots", sans-serif;
+}
