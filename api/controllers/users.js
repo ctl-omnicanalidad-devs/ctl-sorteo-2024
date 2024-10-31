@@ -58,6 +58,19 @@ const checkInvitado = async (correo) => {
   }
 };
 
+const getEquipo = async (correo) => {
+  const consulta = `SELECT * FROM invitados WHERE email = ?`;
+  const values = [correo];
+
+  try {
+    const results = await executeQuery(consulta, values);
+    return results[0].equipo;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
 const add_user = async (req, res, next) => {
   const isInvitado = await checkInvitado(req.body.correo);
   if (!isInvitado) {
@@ -66,9 +79,10 @@ const add_user = async (req, res, next) => {
     });
   }
   const isHabilitado = await checkHabilitado(req.body.correo);
+  const equipo = await getEquipo(req.body.correo);
 
   const consulta =
-    "INSERT INTO participantes (nombre, apellido, correo, empresa, ganador, habilitado) VALUES (?, ?, ?, ?, ?, ?)";
+    "INSERT INTO participantes (nombre, apellido, correo, empresa, ganador, habilitado, equipo) VALUES (?, ?, ?, ?, ?, ?, ?)";
 
   const empresa = req.body.correo.endsWith("@ctl.com.ar") ? "CTL" : "ACTIVIA";
   const values = [
@@ -78,6 +92,7 @@ const add_user = async (req, res, next) => {
     empresa,
     0,
     isHabilitado,
+    equipo,
   ];
 
   try {
