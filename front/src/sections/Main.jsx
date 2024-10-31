@@ -67,6 +67,7 @@ export default function Main({
       setGanador({
         nombre: elemento_ganador.textContent,
         id: elemento_ganador.getAttribute("user_id"),
+        equipo: elemento_ganador.getAttribute("equipo"),
       });
       setUltimoGanador(Number(elemento_ganador.getAttribute("key_number")));
       setPuedoJugar(true);

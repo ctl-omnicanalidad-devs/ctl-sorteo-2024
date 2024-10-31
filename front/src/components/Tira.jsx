@@ -56,6 +56,7 @@ export default function Tira({ jugadores, numero }) {
             offset_px={-index * div_h - div_h / 2 + window_size / 2}
             user_id={get_user_id(jugador)}
             empresa={jugador.empresa}
+            equipo={jugador.equipo}
             className=" h-20 py-6 text-center text-white text-xl flex flex-col tile_jugador"
             style={{ backgroundColor: colores[index % 3] }}
           >
