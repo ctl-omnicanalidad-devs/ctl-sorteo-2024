@@ -11,6 +11,7 @@ const Form = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [success, setSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,6 +34,7 @@ const Form = () => {
     e.preventDefault();
     setError(false);
     setSuccess(false);
+    setLoading(true);
     const makePostRequest = async () => {
         try {
             await checkForm();
@@ -55,6 +57,8 @@ const Form = () => {
             } else {
                 setErrorMessage(error.message);
             }
+        } finally {
+            setLoading(false);
         }
     }
     makePostRequest();
@@ -102,13 +106,20 @@ const Form = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-black21-100 text-white py-2 px-4 rounded-md hover:bg-black21-200 transition-colors duration-200 "
+          className="w-full bg-black21-100 text-white py-2 px-4 rounded-md hover:bg-black21-200 transition-colors duration-200 disabled:opacity-50 "
+          disabled={loading}
         >
           Enviar
         </button>
       </form>
+      {loading && (
+        <div className="flex justify-center mt-4">
+          <div className="loader"></div>
+          <p className="ml-2">Guardando...</p>
+        </div>
+      )}
       {error && <p className="text-red-500 text-center mt-4">{errorMessage}</p>}
-        {success && <p className="text-green-500 text-center mt-4">{successMessage}</p>}
+      {success && <p className="text-green-500 text-center mt-4">{successMessage}</p>}
     </div>
   );
 };
