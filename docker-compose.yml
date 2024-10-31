@@ -2,7 +2,7 @@ services:
   mysql:
     image: mariadb:10.5
     ports:
-      - "3306:3306"
+      - "127.0.0.1:3306:3306"
     volumes:
       - db_data:/var/lib/mysql
     networks:
