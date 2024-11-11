@@ -21,6 +21,8 @@ export default {
       blue: colors.blue,
       fuchsia: colors.fuchsia,
       slate: colors.slate,
+      zinc: colors.zinc,
+      sky: colors.sky,
     },
   },
   plugins: [],

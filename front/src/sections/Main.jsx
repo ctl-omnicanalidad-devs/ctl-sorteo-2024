@@ -71,7 +71,7 @@ export default function Main({
       });
       setUltimoGanador(Number(elemento_ganador.getAttribute("key_number")));
       setPuedoJugar(true);
-    }, 5000);
+    }, 10000);
   };
 
   useEffect(() => {
