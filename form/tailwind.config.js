@@ -19,7 +19,9 @@ export default {
       red: colors.red,
       green: colors.green,
       blue: colors.blue,
-      fuchsia: colors.fuchsia,
+      fuchsia: {
+        500: "#ef539e",
+      },
     },
   },
   plugins: [],
