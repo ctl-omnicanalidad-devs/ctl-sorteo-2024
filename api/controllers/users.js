@@ -1,4 +1,5 @@
 const executeQuery = require("../helpers/executeQuery");
+const capitalizeFirstLetter = require("../helpers/capitalizeFirstLetter");
 
 const sayHello = (req, res, next) => {
   res.status(200).json({ message: "Hello" });
@@ -86,8 +87,8 @@ const add_user = async (req, res, next) => {
 
   const empresa = req.body.correo.endsWith("@ctl.com.ar") ? "CTL" : "ACTIVIA";
   const values = [
-    req.body.nombre,
-    req.body.apellido,
+    capitalizeFirstLetter(req.body.nombre),
+    capitalizeFirstLetter(req.body.apellido),
     req.body.correo,
     empresa,
     0,
