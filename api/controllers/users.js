@@ -74,11 +74,6 @@ const getEquipo = async (correo) => {
 
 const add_user = async (req, res, next) => {
   const isInvitado = await checkInvitado(req.body.correo);
-  if (!isInvitado) {
-    return res.status(400).json({
-      message: `El correo ${req.body.correo} no se encuentra invitado`,
-    });
-  }
   const isHabilitado = await checkHabilitado(req.body.correo);
   const equipo = await getEquipo(req.body.correo);
 
@@ -92,7 +87,7 @@ const add_user = async (req, res, next) => {
     req.body.correo,
     empresa,
     0,
-    isHabilitado,
+    isInvitado && isHabilitado,
     equipo,
   ];
 
