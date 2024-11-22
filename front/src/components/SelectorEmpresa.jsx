@@ -13,7 +13,7 @@ export default function SelectorEmpresa({ setEmpresa }) {
       <CardEmpresa
         setEmpresa={setEmpresa}
         nombre={"Activia"}
-        imagen={"https://activia.com.ar/assets/images/activia-isologo.png"}
+        imagen={"https://raw.githubusercontent.com/ctl-omnicanalidad-devs/ctl-sorteo-2024/refs/heads/main/form/public/svg-image-1.svg"}
       />
     </div>
   );

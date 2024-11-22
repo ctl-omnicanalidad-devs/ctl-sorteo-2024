@@ -29,8 +29,9 @@ function App() {
         <Spinner texto={"Cargando jugadores"} /> :
         <GameScreen jugadores={jugadores} setJugadores={setJugadores} premios={premios} empresa={empresa}/> 
   ) : (
-    <div className=" w-screen h-screen flex items-center justify-center bg-black21-100">
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+    <div className=" w-screen h-screen flex items-center justify-center flex-col bg-black21-100">
+      <img src="https://raw.githubusercontent.com/ctl-omnicanalidad-devs/ctl-sorteo-2024/refs/heads/main/front/public/frame.png"></img>
+      <button className="bg-black text-white px-4 py-2 rounded-lg my-8" onClick={() => setPassword("sorteofindeaño2024")}>Ingresar</button>
     </div>
   )
   );
